@@ -62,7 +62,6 @@ export class StockMarketComponent implements OnInit {
       stock.currentPrice = stock.currentPrice < 0 ? 0.00 : stock.currentPrice
       this.calculateStockChange(stock);
     }
-
   }
 
   getChange(stock: Stock) {
