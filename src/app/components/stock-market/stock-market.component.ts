@@ -88,4 +88,6 @@ export class StockMarketComponent implements OnInit {
     stock.percentChange = (stock.change / stock.price) * 100;
     stock.percentChange = Number(stock.percentChange);
   }
+
+  
 }

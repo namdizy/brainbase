@@ -37,12 +37,11 @@
                                 </td>
                                 <td>
                                     <span
-                                        *ngIf="!stock.percentChange || stock.percentChange == stoc; else showChange">--</span>
+                                        *ngIf="!stock.change || stock.change == 0.00; else showChange">--</span>
                                     <ng-template #showChange>
                                         <div [className]="stock.change > 0? 'text-success': 'text-danger'" >
                                             <span class="col">{{stock.change | number : '1.2-2'}}</span>
-                                            <i class="col"
-                                                [className]="stock.change > 0 ? 'fas fa-caret-up' : 'fas fa-caret-down'"></i>
+                                            <i  [ngClass]="stock.change < 0 ? 'fas fa-caret-down' : 'fas fa-caret-up'"></i>
                                             <span class="col">{{stock.percentChange | number : '1.2-2'}}%</span>
                                         </div>
 
