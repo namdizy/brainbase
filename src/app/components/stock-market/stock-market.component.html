@@ -1,0 +1,67 @@
+<div class="row justify-content-center bb-margin-top-10">
+    <div class="card col-10 bb-stock-market-wrapper">
+        <div class="card-title">
+            <span class="bb-stock-header">Stock Market Overview</span>
+        </div>
+        <div class="card-body">
+            <div *ngIf="error; else showStocks">
+                <span>No Data Found</span>
+            </div>
+            <ng-template #showStocks>
+                <div class="row justify-content-between bb-margin-top-btm-5">
+                    <span class="col-2 align-self-center">Day {{day}}</span>
+                    <button class="col-2" (click)="forwardDayClick()" class="btn btn-primary" type="submit">Next
+                        Day</button>
+                </div>
+                <div class="row bb-margin-top-btm-5">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Index</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Initial Value</th>
+                                <th scope="col">Current Value</th>
+                                <th scope="col">Change Net / %</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let stock of stocks">
+                                <th scope="row">{{stock.symbol}}</th>
+                                <td>{{stock.name}}</td>
+                                <td>{{stock.price | number : '1.2-2'}}</td>
+                                <td>
+                                    <span *ngIf="!stock.currentPrice; else showCurrentPrice">0.00</span>
+                                    <ng-template #showCurrentPrice>{{stock.currentPrice | number : '1.2-2'}}
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <span
+                                        *ngIf="!stock.percentChange || stock.percentChange == stoc; else showChange">--</span>
+                                    <ng-template #showChange>
+                                        <div [className]="stock.change > 0? 'text-success': 'text-danger'" class="row">
+                                            <span class="col">{{stock.change | number : '1.2-2'}}</span>
+                                            <i class="col"
+                                                [className]="stock.change > 0 ? 'fas fa-caret-up' : 'fas fa-caret-down'"></i>
+                                            <span class="col">{{stock.percentChange | number : '1.2-2'}}%</span>
+                                        </div>
+
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary bb-margin-left-right-5"
+                                        (click)="inflateStockClick(stock)" type="submit">Inflate Stock</button>
+                                    <button class="btn btn-danger bb-margin-left-right-5"
+                                        (click)="crashStockClick(stock)" type="submit">Crash Stock</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-between bb-margin-top-btm-5 bb-stock-market-date">
+                    <span class="col-6">{{currentDate | date:'EEEE, MMMM d, y'}}</span>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
