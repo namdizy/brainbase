@@ -41,7 +41,12 @@
                                     <ng-template #showChange>
                                         <div [className]="stock.change > 0? 'text-success': 'text-danger'" >
                                             <span class="col">{{stock.change | number : '1.2-2'}}</span>
-                                            <i  [ngClass]="stock.change < 0 ? 'fas fa-caret-down' : 'fas fa-caret-up'"></i>
+                                            <span *ngIf ="stock.change > 0; else showDownIcon">
+                                                <fa-icon [icon]="upIcon"></fa-icon>
+                                            </span>
+                                            <ng-template #showDownIcon>
+                                                <fa-icon [icon]="downIcon"></fa-icon>
+                                            </ng-template>
                                             <span class="col">{{stock.percentChange | number : '1.2-2'}}%</span>
                                         </div>
 

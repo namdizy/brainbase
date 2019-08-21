@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 import { Stock, StockResolved } from '../../models/stock';
 
@@ -14,6 +15,9 @@ export class StockMarketComponent implements OnInit {
   error: string;
   day: number;
   currentDate: number;
+  downIcon = faCaretDown;
+  upIcon = faCaretUp; 
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -88,6 +92,4 @@ export class StockMarketComponent implements OnInit {
     stock.percentChange = (stock.change / stock.price) * 100;
     stock.percentChange = Number(stock.percentChange);
   }
-
-  
 }
